@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ccnet.campfire.plugin", "ccnet.campfire.plugin.csproj", "{87F97F9B-0325-4DF1-9062-CFCECBCBBD78}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ccnet.campfire.plugin.tests.connected", "src\ccnet.campfire.plugin.tests.connected\ccnet.campfire.plugin.tests.connected.csproj", "{8357B586-97CB-4A3C-B3A3-BAECB1522C81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ccnet.campfire.plugin", "src\ccnet.campfire.plugin\ccnet.campfire.plugin.csproj", "{87F97F9B-0325-4DF1-9062-CFCECBCBBD78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,6 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8357B586-97CB-4A3C-B3A3-BAECB1522C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8357B586-97CB-4A3C-B3A3-BAECB1522C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8357B586-97CB-4A3C-B3A3-BAECB1522C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8357B586-97CB-4A3C-B3A3-BAECB1522C81}.Release|Any CPU.Build.0 = Release|Any CPU
 		{87F97F9B-0325-4DF1-9062-CFCECBCBBD78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{87F97F9B-0325-4DF1-9062-CFCECBCBBD78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87F97F9B-0325-4DF1-9062-CFCECBCBBD78}.Release|Any CPU.ActiveCfg = Release|Any CPU
