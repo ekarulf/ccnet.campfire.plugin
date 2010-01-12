@@ -13,7 +13,7 @@ namespace ccnet.campfire.plugin
 
         public override string ToString()
         {
-            return result.Status.ToString();
+            return string.Format("[ccnet] Project '{0}' build complete. Result: {1}. Label: {2}.", result.ProjectName, result.Status, result.Label);
         }
     }
 }
