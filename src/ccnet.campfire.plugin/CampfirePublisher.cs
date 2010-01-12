@@ -12,15 +12,22 @@ namespace ccnet.campfire.plugin
         {
             try
             {
-                var room = new CampfireRoom("ccnetcampfireplugin",
-                                            "4c7838c235627478c86d2c6b6ed60b512cdb8303",
-                                            265935);
+                var room = new CampfireRoom(AccountName, AuthToken, RoomId);
                 room.Post(new IntegrationMessage(result).ToString());
             }
             catch (Exception e)
             {
-                Log.Error(e);
+                Log.Warning("[campfirepublisher] Error publishing to Campfire: " + e.Message);
             }
         }
+
+        [ReflectorProperty("account-name")]
+        public string AccountName { get; set; }
+
+        [ReflectorProperty("auth-token")]
+        public string AuthToken { get; set; }
+
+        [ReflectorProperty("room-id")]
+        public int RoomId { get; set; }
     }
 }
