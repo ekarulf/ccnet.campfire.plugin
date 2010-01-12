@@ -5,6 +5,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ccnet.campfire.plugin.tests
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ccnet.campfire.plugin", "src\ccnet.campfire.plugin\ccnet.campfire.plugin.csproj", "{87F97F9B-0325-4DF1-9062-CFCECBCBBD78}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3BF9A659-C6E3-4CDF-8ECB-22CE5133D741}"
+	ProjectSection(SolutionItems) = preProject
+		Gotchas.md = Gotchas.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ccnet.campfire.plugin.tests.disconnected", "src\ccnet.campfire.plugin.tests.disconnected\ccnet.campfire.plugin.tests.disconnected.csproj", "{7B4807F7-7B64-46E3-8D6B-5C9590B9E291}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +26,10 @@ Global
 		{87F97F9B-0325-4DF1-9062-CFCECBCBBD78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87F97F9B-0325-4DF1-9062-CFCECBCBBD78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87F97F9B-0325-4DF1-9062-CFCECBCBBD78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B4807F7-7B64-46E3-8D6B-5C9590B9E291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B4807F7-7B64-46E3-8D6B-5C9590B9E291}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B4807F7-7B64-46E3-8D6B-5C9590B9E291}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B4807F7-7B64-46E3-8D6B-5C9590B9E291}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

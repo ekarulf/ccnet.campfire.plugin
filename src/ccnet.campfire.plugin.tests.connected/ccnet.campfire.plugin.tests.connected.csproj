@@ -46,6 +46,10 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="ThoughtWorks.CruiseControl.Core, Version=1.4.4.83, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\CruiseControl.NET-1.4.4.83\server\ThoughtWorks.CruiseControl.Core.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PostMessages.cs" />

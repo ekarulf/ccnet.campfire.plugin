@@ -1,0 +1,1 @@
+* Need to set Content-Type HTTP header when posting messages
