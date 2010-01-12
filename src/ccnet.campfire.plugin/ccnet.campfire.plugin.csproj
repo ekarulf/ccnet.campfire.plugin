@@ -42,6 +42,7 @@
     <Compile Include="CampfirePublisher.cs" />
     <Compile Include="CampfireRoom.cs" />
     <Compile Include="CampfireTranscriptReader.cs" />
+    <Compile Include="IntegrationMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="NetReflector, Version=1.1.2009.1004, Culture=neutral, PublicKeyToken=2f4dd8b32acbcd8e, processorArchitecture=MSIL">
