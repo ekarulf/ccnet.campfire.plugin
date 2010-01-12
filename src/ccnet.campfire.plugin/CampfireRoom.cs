@@ -22,15 +22,67 @@ namespace ccnet.campfire.plugin
 
         public void Join()
         {
-            PostTo("join").GetResponse();
+            PostTo("join");
         }
 
-        private HttpWebRequest PostTo(string action)
+        public void Post(string message)
+        {
+            PostTo("speak", req =>
+                                {
+                                    using (var sw = new XmlTextWriter(req.GetRequestStream(), Encoding.UTF8))
+                                    {
+                                        sw.WriteStartDocument();
+                                        sw.WriteStartElement("message");
+                                        sw.WriteElementString("type", "TextMessage");
+                                        sw.WriteElementString("body", message);
+                                        sw.WriteEndElement();
+                                        sw.WriteEndDocument();
+                                    }
+                                });
+        }
+
+        public IEnumerable<string> Transcript
+        {
+            get
+            {
+                var webResponse = GetFrom("transcript");
+                using (var stream = webResponse.GetResponseStream())
+                using (var reader = new StreamReader(stream))
+                {
+                    return new CampfireTranscriptReader().Process(reader.ReadToEnd());
+                }
+            }
+        }
+
+        public void Leave()
+        {
+            PostTo("leave");
+        }
+
+        private void PostTo(string action)
+        {
+            PostTo(action, req => { });
+        }
+
+        private WebResponse GetFrom(string action)
+        {
+            HttpWebRequest request = RequestTo(action, "GET");
+            return request.GetResponse();
+        }
+
+        private void PostTo(string action, Action<HttpWebRequest> requestInfo)
+        {
+            var request = RequestTo(action, "POST");
+            request.ContentType = "application/xml";
+            requestInfo(request);
+            request.GetResponse();
+        }
+
+        private HttpWebRequest RequestTo(string action, string method)
         {
             var request = (HttpWebRequest) WebRequest.Create(string.Format("http://{0}.campfirenow.com/room/{1}/{2}.xml", accountName, roomId, action));
-            request.Method = "POST";
+            request.Method = method;
             request.Headers[HttpRequestHeader.Authorization] = string.Format("Basic {0}", EncodedAuthToken);
-            request.ContentType = "application/xml";
             request.Accept = "application/xml";
             return request;
         }
@@ -42,48 +94,6 @@ namespace ccnet.campfire.plugin
                 byte[] bytesToEncode = Encoding.ASCII.GetBytes(authToken + ":X");
                 return Convert.ToBase64String(bytesToEncode);
             }
-        }
-
-        public void Post(string message)
-        {
-            var request = PostTo("speak");
-            using (var sw = new XmlTextWriter(request.GetRequestStream(), Encoding.UTF8))
-            {
-                sw.WriteStartDocument();
-                sw.WriteStartElement("message");
-                sw.WriteElementString("type", "TextMessage");
-                sw.WriteElementString("body", message);
-                sw.WriteEndElement();
-                sw.WriteEndDocument();
-            }
-            request.GetResponse();
-        }
-
-        public IEnumerable<string> Transcript
-        {
-            get
-            {
-                var webResponse = GetFrom("transcript").GetResponse();
-                using (var stream = webResponse.GetResponseStream())
-                using (var reader = new StreamReader(stream))
-                {
-                    return new CampfireTranscriptReader().Process(reader.ReadToEnd());
-                }
-            }
-        }
-
-        private HttpWebRequest GetFrom(string action)
-        {
-            var request = (HttpWebRequest) WebRequest.Create(string.Format("http://{0}.campfirenow.com/room/{1}/{2}.xml", accountName, roomId, action));
-            request.Method = "GET";
-            request.Headers[HttpRequestHeader.Authorization] = string.Format("Basic {0}", EncodedAuthToken);
-            request.Accept = "application/xml";
-            return request;
-        }
-
-        public void Leave()
-        {
-            PostTo("leave").GetResponse();
         }
     }
 }
