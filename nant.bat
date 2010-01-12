@@ -1,1 +1,1 @@
-tools\nant-0.86-nightly-2009-06-21\bin\NAnt.exe %*
+.\tools\nant-0.86-nightly-2009-06-21\bin\NAnt.exe %*
