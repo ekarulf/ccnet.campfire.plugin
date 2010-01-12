@@ -9,9 +9,10 @@ namespace ccnet.campfire.plugin.tests.connected
         [Test]
         public void can_post_a_message_then_retrieve_it()
         {
-            var room = new CampfireRoom("ccnetcampfireplugin",
-                                        "4c7838c235627478c86d2c6b6ed60b512cdb8303",
-                                        265935);
+             Assert.Fail("Requires you to fill in your real campfire account info to work.");
+            var room = new CampfireRoom("the first part of the URL",
+                                        "your API key",
+                                        -1);
 
             room.Join();
 
