@@ -39,6 +39,12 @@
   </Target>
   -->
   <ItemGroup>
+    <Compile Include="CampfireRoom.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
 </Project>
