@@ -17,7 +17,8 @@ A custom [CruiseControl.NET](http://ccnet.thoughtworks.com/) plugin which will p
 	      <campfire 
 		    account-name="the bit before .campfirenow in your campfire URL" 
 			auth-token="the campfire API token of the user that the plugin should post as" 
-			room-id="number at end of campfire room URL" />
+			room-id="number at end of campfire room URL"
+			is-https="true|false, depending on your Campfire account settings" />
 	      <xmllogger />
 	    </publishers>
       </project>
