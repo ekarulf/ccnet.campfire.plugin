@@ -12,12 +12,14 @@ namespace ccnet.campfire.plugin
         private readonly string accountName;
         private readonly string authToken;
         private readonly int roomId;
+        private readonly bool isHttps;
 
-        public CampfireRoom(string accountName, string authToken, int roomId)
+        public CampfireRoom(string accountName, string authToken, int roomId, bool isHttps)
         {
             this.accountName = accountName;
             this.authToken = authToken;
             this.roomId = roomId;
+            this.isHttps = isHttps;
         }
 
         public void Join()
@@ -27,18 +29,19 @@ namespace ccnet.campfire.plugin
 
         public void Post(string message)
         {
-            PostTo("speak", req =>
-                                {
-                                    using (var sw = new XmlTextWriter(req.GetRequestStream(), Encoding.UTF8))
-                                    {
-                                        sw.WriteStartDocument();
-                                        sw.WriteStartElement("message");
-                                        sw.WriteElementString("type", "TextMessage");
-                                        sw.WriteElementString("body", message);
-                                        sw.WriteEndElement();
-                                        sw.WriteEndDocument();
-                                    }
-                                });
+            PostTo("speak",
+                   req =>
+                   {
+                       using (var sw = new XmlTextWriter(req.GetRequestStream(), Encoding.UTF8))
+                       {
+                           sw.WriteStartDocument();
+                           sw.WriteStartElement("message");
+                           sw.WriteElementString("type", "TextMessage");
+                           sw.WriteElementString("body", message);
+                           sw.WriteEndElement();
+                           sw.WriteEndDocument();
+                       }
+                   });
         }
 
         public IEnumerable<string> Transcript
@@ -48,9 +51,7 @@ namespace ccnet.campfire.plugin
                 var webResponse = GetFrom("transcript");
                 using (var stream = webResponse.GetResponseStream())
                 using (var reader = new StreamReader(stream))
-                {
                     return new CampfireTranscriptReader().Process(reader.ReadToEnd());
-                }
             }
         }
 
@@ -66,7 +67,7 @@ namespace ccnet.campfire.plugin
 
         private WebResponse GetFrom(string action)
         {
-            HttpWebRequest request = RequestTo(action, "GET");
+            var request = RequestTo(action, "GET");
             return request.GetResponse();
         }
 
@@ -80,7 +81,7 @@ namespace ccnet.campfire.plugin
 
         private HttpWebRequest RequestTo(string action, string method)
         {
-            var request = (HttpWebRequest) WebRequest.Create(string.Format("http://{0}.campfirenow.com/room/{1}/{2}.xml", accountName, roomId, action));
+            var request = (HttpWebRequest) WebRequest.Create(string.Format("http{3}://{0}.campfirenow.com/room/{1}/{2}.xml", accountName, roomId, action, isHttps ? "s" : ""));
             request.Method = method;
             request.Headers[HttpRequestHeader.Authorization] = string.Format("Basic {0}", EncodedAuthToken);
             request.Accept = "application/xml";
@@ -91,7 +92,7 @@ namespace ccnet.campfire.plugin
         {
             get
             {
-                byte[] bytesToEncode = Encoding.ASCII.GetBytes(authToken + ":X");
+                var bytesToEncode = Encoding.ASCII.GetBytes(authToken + ":X");
                 return Convert.ToBase64String(bytesToEncode);
             }
         }

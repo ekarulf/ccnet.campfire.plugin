@@ -12,7 +12,7 @@ namespace ccnet.campfire.plugin
         {
             try
             {
-                var room = new CampfireRoom(AccountName, AuthToken, RoomId);
+                var room = new CampfireRoom(AccountName, AuthToken, RoomId, IsHttps);
                 room.Post(new IntegrationMessage(result).ToString());
             }
             catch (Exception e)
@@ -20,6 +20,9 @@ namespace ccnet.campfire.plugin
                 Log.Warning("[campfirepublisher] Error publishing to Campfire: " + e.Message);
             }
         }
+
+        [ReflectorProperty("is-https")]
+        public bool IsHttps { get; set; }
 
         [ReflectorProperty("account-name")]
         public string AccountName { get; set; }

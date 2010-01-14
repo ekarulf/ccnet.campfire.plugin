@@ -12,7 +12,8 @@ namespace ccnet.campfire.plugin.tests.connected
              Assert.Fail("Requires you to fill in your real campfire account info to work.");
             var room = new CampfireRoom("the first part of the URL",
                                         "your API key",
-                                        -1);
+                                        -1,
+                                        true);
 
             room.Join();
 
